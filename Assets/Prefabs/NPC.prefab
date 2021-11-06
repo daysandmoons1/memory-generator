@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: 1469123399
   m_SortingLayer: 2
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 4852dc3db3f5ada4e97af37e5f913642, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0601d2ea2a0155649bd58069b5f18ecd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: -2712439345973796333}
   m_Layer: 6
   m_Name: NPC
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -157,7 +157,7 @@ SpriteRenderer:
   m_SortingLayerID: 1469123399
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 37c551caf2ada174d96c48c202daa87a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5a82e018bedcd2843a95facc6c297465, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -202,7 +202,7 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.015198052, y: -0.06978619}
+  m_Offset: {x: 0.015198052, y: -1.01}
   m_Size: {x: 1.006431, y: 2.8604276}
   m_Direction: 0
 --- !u!114 &-2712439345973796333

@@ -4,13 +4,34 @@ using UnityEngine;
 
 public class MemoryGenerator : MonoBehaviour
 {
-    public void Hang(GameObject npc)
+    private Sprite hangerSprite;
+
+    public GameObject hanger;
+
+    void Start()
     {
-        
+        hangerSprite = hanger.GetComponent<SpriteRenderer>();    
+    }
+
+    public bool Hang(GameObject npc)
+    {
+        if(hangerSprite!=null)
+            return false;
+        else
+        {
+            hangerSprite = npc.GetComponent<SpriteRenderer>().sprite;
+            StartCoroutine("ExtractMemory");
+            return true;
+        }
     }
 
     private void GetEnergy(float _energy)
     {
         GameManager.Instance.Energy = _energy;
+    }
+
+    IEnumerator ExtractMemory()
+    {
+
     }
 }

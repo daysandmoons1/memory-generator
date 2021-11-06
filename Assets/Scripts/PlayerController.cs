@@ -5,6 +5,12 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Transform tr;
+    private bool movable = true;
+    public bool Movable
+    {
+        get {return movable;}
+        set {movable = value;}
+    }
 
     [SerializeField]
     private float moveSpeed = 5.0f;
@@ -22,6 +28,7 @@ public class PlayerController : MonoBehaviour
         float r = Input.GetAxisRaw("Mouse X");
 
         // ¿Ãµø
-        tr.Translate(Vector2.right * h * moveSpeed * Time.deltaTime);
+        if(movable)
+            tr.Translate(Vector2.right * h * moveSpeed * Time.deltaTime);
     }
 }
