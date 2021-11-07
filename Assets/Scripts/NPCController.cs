@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NPCController : MonoBehaviour
 {
-    private float maxSpeed = 3f;
+    private float maxSpeed = 5f;
     private float moveSpeed;
 
     private Vector3 yFlip = new Vector3(0, 180, 0);

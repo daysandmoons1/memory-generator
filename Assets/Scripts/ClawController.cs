@@ -66,7 +66,12 @@ public class ClawController : MonoBehaviour
         tr.localPosition = pos;
         
         if(catchedNPC.GetComponent<SpriteRenderer>().sprite != null)
-            memoryGenerator.Hang(catchedNPC);
+        {
+            if(memoryGenerator.Hang(catchedNPC))
+            {
+                catchedNPC.GetComponent<SpriteRenderer>().sprite = null;
+            }
+        }
             
         player.Movable = true;
     }
@@ -79,9 +84,7 @@ public class ClawController : MonoBehaviour
 
     private void Catch(GameObject _npc)
     {
-        Debug.Log("_npc sprite : " + _npc.GetComponent<SpriteRenderer>().sprite);
         catchedNPC.GetComponent<SpriteRenderer>().sprite = _npc.GetComponent<SpriteRenderer>().sprite;
-        Debug.Log("catchedNPC sprite : " + catchedNPC);
         Destroy(_npc);
     }
 }

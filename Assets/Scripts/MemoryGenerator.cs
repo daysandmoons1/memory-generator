@@ -4,22 +4,21 @@ using UnityEngine;
 
 public class MemoryGenerator : MonoBehaviour
 {
-    private Sprite hangerSprite;
-
+    private float perEnery = 5f;
     public GameObject hanger;
 
     void Start()
     {
-        hangerSprite = hanger.GetComponent<SpriteRenderer>();    
+        StartCoroutine("ExtractMemory");
     }
 
     public bool Hang(GameObject npc)
     {
-        if(hangerSprite!=null)
+        if(hanger.GetComponent<SpriteRenderer>().sprite != null)
             return false;
         else
         {
-            hangerSprite = npc.GetComponent<SpriteRenderer>().sprite;
+            hanger.GetComponent<SpriteRenderer>().sprite = npc.GetComponent<SpriteRenderer>().sprite;
             StartCoroutine("ExtractMemory");
             return true;
         }
@@ -32,6 +31,8 @@ public class MemoryGenerator : MonoBehaviour
 
     IEnumerator ExtractMemory()
     {
-
+        yield return new WaitForSeconds(1f);
+        GetEnergy(perEnery);
+        hanger.GetComponent<SpriteRenderer>().sprite = null;
     }
 }

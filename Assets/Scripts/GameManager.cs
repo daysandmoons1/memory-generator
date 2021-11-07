@@ -5,7 +5,10 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    private float timeLimit = 10f;
+    private PlayerController playerController;
+
+    private float timeLimit = 30f;
+    private float gaugeSpeed = 3f;
 
     private static GameManager instance;
     public static GameManager Instance
@@ -40,6 +43,8 @@ public class GameManager : MonoBehaviour
         set
         {
             energy += value;
+            if(energy < 0)
+                IsGameOver = true;
             energyGauge.fillAmount = energy * 0.01f;
         }
     }
@@ -58,6 +63,8 @@ public class GameManager : MonoBehaviour
 
     public Image energyGauge;
     public Text timeTxt;
+    public GameObject gameoverObj;
+    public Image fadeout;
 
     private void Awake()
     {
@@ -71,14 +78,17 @@ public class GameManager : MonoBehaviour
 
         Debug.Log(this.name);
 
+        playerController = FindObjectOfType<PlayerController>();
+
         StartCoroutine("Timer");
+        StartCoroutine("EnergyGauge");
     }
 
     IEnumerator Timer()
     {
         float _time = timeLimit;
         timeTxt.text = timeLimit.ToString();
-        while(_time > 0)
+        while(_time > 0 && !(isGameover))
         {
             yield return new WaitForSeconds(1f);
             _time = _time - 1f;
@@ -87,11 +97,50 @@ public class GameManager : MonoBehaviour
         IsGameOver = true;
     }
 
+    IEnumerator EnergyGauge()
+    {
+        float _time = 0;
+        while(energy > 0)
+        {
+            energy -= 0.05f;
+            energyGauge.fillAmount = energy * 0.01f;
+            yield return null;
+        }
+        IsGameOver = true;
+    }
+
     private void GameOver()
     {
         // 플레이어 조작키 비활성화
-        // NPC 스포너 비활성화
-        // 엔딩 씬으로 넘어가기
-        Debug.Log("게임오버!");
+        playerController.Movable = false;
+
+        timeTxt.text = "00";
+         energyGauge.fillAmount = 0;
+
+        // gameoverObj.SetActive(true);
+        StartCoroutine("FadeOut");
+    }
+
+    IEnumerator FadeOut()
+    {
+        fadeout.gameObject.SetActive(true);
+        yield return StartCoroutine("CoFadeOut");
+    }
+
+    IEnumerator CoFadeOut()
+    {
+        Color color = fadeout.color;
+        while(color.a < 1f)
+        {
+            color.a += Time.deltaTime / 3f;
+            fadeout.color = color;
+
+            if(color.a >= 1f) color.a = 1f;
+
+            yield return null;
+        }
+        fadeout.color = color;
+        
+        SceneController.Instance.LoadEndingScene();
     }
 }
